@@ -1,4 +1,4 @@
-FROM tensorflow/tensorflow:latest
+FROM tensorflow/tensorflow:latest-gpu
 
 MAINTAINER shimtom
 
@@ -46,7 +46,7 @@ RUN ${PYENV_ROOT}/shims/conda create -n tensorflow-python2 python=2.7.12 anacond
 RUN pyenv global $ANACONDA_PYTHON2_VERSION/envs/tensorflow-python2
 RUN pyenv rehash
 RUN pip --no-cache-dir install --ignore-installed --upgrade \
-      https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-${TENSORFLOW_VERSION}-cp27-none-linux_x86_64.whl
+      https://storage.googleapis.com/tensorflow/linux/gpu/tensorflow_gpu-${TENSORFLOW_VERSION}-cp27-none-linux_x86_64.whl
 
 WORKDIR "/notebooks"
 CMD ["/run_jupyter.sh"]
