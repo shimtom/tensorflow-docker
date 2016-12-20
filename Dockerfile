@@ -59,7 +59,4 @@ RUN pip install --upgrade pip
 RUN pip --no-cache-dir install --ignore-installed --upgrade \
       https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-${TENSORFLOW_VERSION}-cp35-cp35m-linux_x86_64.whl
 
-COPY jupyter_notebook_config.py /home/user/.jupyter/
-RUN mkdir "/home/user/notebooks"
-WORKDIR "/home/user/notebooks"
-CMD ["jupyter-notebook"]
+COPY jupyter_notebook_config.py /root/.jupyter/
