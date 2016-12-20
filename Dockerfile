@@ -1,4 +1,4 @@
-FROM tensorflow/tensorflow:latest
+FROM ubuntu:14.04
 
 MAINTAINER shimtom
 
@@ -18,6 +18,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
       libssl-dev \
       llvm \
       make \
+      software-properties-common \
       vim \
       wget \
       xz-utils \
@@ -60,3 +61,7 @@ RUN pip --no-cache-dir install --ignore-installed --upgrade \
       https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-${TENSORFLOW_VERSION}-cp35-cp35m-linux_x86_64.whl
 
 COPY jupyter_notebook_config.py /root/.jupyter/
+
+WORKDIR /notebooks
+
+CMD ["jupyter-notebook"]
