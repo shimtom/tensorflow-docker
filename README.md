@@ -7,6 +7,14 @@ When you run this container, jupyter launches.
 Default password of jupyter is `JUPYTER_PASS`. You can change this password by setting env variable `PASSWORD`.
 
 ## Usage
-```
-$ docker run -it -p 8888:8888 -e PASSWORD=somepassword shimtom/tensorflow:latest-gpu
-```
+* cpu only container
+  ```
+  $ docker run -it -p 8888:8888 -e PASSWORD=somepassword shimtom/tensorflow:latest
+  ```
+  go to your browser http://localhost:8888
+* gpu container
+  ```
+  $ nvidia-docker run -it -p 8888:8888 -e PASSWORD=somepassword shimtom/tensorflow:latest-gpu
+  ```
+  go to your browser http://localhost:8888
+  Note: It needs to install [nvidia-docker](https://github.com/NVIDIA/nvidia-docker)
