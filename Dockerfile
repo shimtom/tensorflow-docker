@@ -1,4 +1,4 @@
-FROM ubuntu:14.04
+FROM ubuntu:16.04
 
 MAINTAINER shimtom
 
@@ -36,29 +36,13 @@ RUN git clone https://github.com/yyuu/pyenv.git /root/.pyenv
 RUN echo 'eval "$(pyenv init -)"' >> /root/.bashrc
 
 # install anaconda
-ENV ANACONDA_VERSION anaconda2-4.1.1
+ENV ANACONDA_VERSION anaconda3-4.3.1
 RUN pyenv install $ANACONDA_VERSION && \
     pyenv rehash && \
     pyenv global $ANACONDA_VERSION && \
     pyenv rehash
-
-ENV TENSORFLOW_VERSION 0.12.0rc1
-
-# install tensorflow-cpu python2
-RUN conda create -n tensorflow-python2 python=2.7 anaconda -y
-RUN pyenv global $ANACONDA_VERSION/envs/tensorflow-python2
-RUN pyenv rehash
-RUN pip install --upgrade pip
-RUN pip --no-cache-dir install --ignore-installed --upgrade \
-      https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-${TENSORFLOW_VERSION}-cp27-none-linux_x86_64.whl
-
-# install tensorflow-cpu python3
-RUN conda create -n tensorflow-python3 python=3.5 anaconda -y
-RUN pyenv global $ANACONDA_VERSION/envs/tensorflow-python3
-RUN pyenv rehash
-RUN pip install --upgrade pip
-RUN pip --no-cache-dir install --ignore-installed --upgrade \
-      https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-${TENSORFLOW_VERSION}-cp35-cp35m-linux_x86_64.whl
+RUN pip3 install --upgrade pip3
+RUN pip3 install tensorflow
 
 COPY jupyter_notebook_config.py /root/.jupyter/
 
